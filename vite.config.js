@@ -8,32 +8,26 @@ import  {libInjectCss} from "vite-plugin-lib-inject-css";
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname,"lib/index.js"),
-      name: "first-components-library",
-      fileName: (format) =>`index.${format}.js`,
-    }
-  },
-  rollupOptions:{
-    external:["react", "react-dom"],
-    input: Object.fromEntries(
-        glob.sync('lib/**/*.{js,jsx}').map(file => [
+      entry: resolve(__dirname, "lib/index.js"),
+      formats: ['es']
+    },
+    rollupOptions: {
+      external: ["react", "react/jsx-runtime"],
+      input: Object.fromEntries(
+          glob.sync('lib/**/*.{js,jsx}',{ ignore: 'lib/**/*.stories.jsx'}).map(file => [
             relative('lib',
                 file.slice(0, file.length - extname(file).length)
             ),
             fileURLToPath(new URL(file, import.meta.url))
-        ])
-    ),
-    output: {
-      assetFileNames: 'asset/[name][extname]',
-      entryFileNames: '[name].js',
-      globals: {
-        react: "React",
-        "react-dom": "ReactDOM"
+          ])
+      ),
+      output: {
+        assetFileNames: 'asset/[name][extname]',
+        entryFileNames: '[name].js',
       },
     },
   },
-  sourcemap: true,
-  emptyOutDir:true,
   plugins: [react(), libInjectCss()],
 })
