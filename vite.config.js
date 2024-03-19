@@ -10,13 +10,15 @@ export default defineConfig({
   build: {
     copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, "lib/index.js"),
-      formats: ['es']
+      entry: resolve(__dirname, "lib/main.js"),
+      name: "first-components-library",
+      formats: ['es'],
+      fileName: (format) =>`index.${format}.js`,
     },
     rollupOptions: {
       external: ["react", "react/jsx-runtime"],
       input: Object.fromEntries(
-          glob.sync('lib/**/*.{js,jsx}',{ ignore: 'lib/**/*.stories.jsx'}).map(file => [
+          glob.sync('lib/**/*.{js,jsx}',{ ignore: 'lib/**/*.stories.js'}).map(file => [
             relative('lib',
                 file.slice(0, file.length - extname(file).length)
             ),

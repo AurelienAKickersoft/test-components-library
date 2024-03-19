@@ -2,16 +2,10 @@
   "name": "first-components-library",
   "private": false,
   "description": "a test to publish component library with vite",
-  "version": "0.0.3",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
-    "./styles": "./dist/style.css"
-  },
+  "version": "0.0.8",
+  "type": "module",
+  "main": "dist/main.js",
+
   "files": [
     "/dist"
   ],
