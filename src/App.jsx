@@ -2,14 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Hello from "../lib/components/Hello/Hello.jsx";
-
+import {Button, Hello} from "../lib";
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
         <Hello/>
+        <Button isDanger={true} message={"Cliquez ici"} url={"https://google.com"} />
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
